@@ -239,12 +239,7 @@ namespace OpenDayDialogue
             }
             throw new OpenDayDialogueException(string.Format("Cannot divide with type {0}.", a.type));
         }
-
-        private static double mod(double a, double b)
-        {
-            return a - (b * Math.Floor(a / b));
-        }
-
+		
         public static Value operator%(Value a, Value b)
         {
             if(a.type != b.type)
@@ -254,12 +249,12 @@ namespace OpenDayDialogue
                 case Value.Type.Double:
                     return new Value() {
                         type = a.type,
-                        valueDouble = mod(a.valueDouble, b.valueDouble)
+                        valueDouble = a.valueDouble % b.valueDouble
                     };
                 case Value.Type.Int32:
                     return new Value() {
-                        type = a.type,
-                        valueDouble = mod((double)a.valueInt32, (double)b.valueInt32)
+                        type = Value.Type.Double,
+                        valueDouble = (double)a.valueInt32 % (double)b.valueInt32
                     };
             }
             throw new OpenDayDialogueException(string.Format("Cannot divide with type {0}.", a.type));
