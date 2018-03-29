@@ -61,7 +61,10 @@ namespace OpenDayDialogue
 
             // wait for user input, goes to one of the choices, and if no conditions match/there are none, go to
             // the end specified in operand1
-            ChoiceSelection = 0xBB
+            ChoiceSelection = 0xBB,
+
+            // set the debug line for interpreter, not always emitted (based on flag)
+            DebugLine = 0xD0 // operand1: line number
         }
 
         public Opcode opcode;
@@ -86,6 +89,7 @@ namespace OpenDayDialogue
                 case Opcode.JumpTrue:
                 case Opcode.JumpFalse:
                 case Opcode.ChoiceSelection:
+                case Opcode.DebugLine:
                     operand1 = br.ReadUInt32();
                     break;
                 case Opcode.Choice:

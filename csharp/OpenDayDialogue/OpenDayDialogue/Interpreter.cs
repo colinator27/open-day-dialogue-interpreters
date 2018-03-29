@@ -24,6 +24,8 @@ namespace OpenDayDialogue
         public TextProcessor textMainProcessor;
         public TextProcessor textChoiceProcessor;
         public TextProcessor textDefinitionProcessor;
+        
+        public int debugCurrentLine;
 
         private int programCounter;
         private Stack<Value> stack;
@@ -54,6 +56,7 @@ namespace OpenDayDialogue
             currentChoices = new List<DialogueChoice>();
             inChoice = false;
             pause = false;
+            debugCurrentLine = -1;
         }
 
         public void SelectChoice(int index)
@@ -98,6 +101,7 @@ namespace OpenDayDialogue
             currentText = null;
             currentChoices.Clear();
             stack.Clear();
+            debugCurrentLine = -1;
             pause = false;
         }
 
@@ -107,6 +111,7 @@ namespace OpenDayDialogue
             currentScene = null;
             currentChoices.Clear();
             stack.Clear();
+            debugCurrentLine = -1;
             pause = true;
         }
 
@@ -490,6 +495,9 @@ namespace OpenDayDialogue
                             handleChoice(choices);
                         }
                     }
+                    break;
+                case Instruction.Opcode.DebugLine:
+                    debugCurrentLine = (int)((uint)inst.operand1);
                     break;
             }
         }
