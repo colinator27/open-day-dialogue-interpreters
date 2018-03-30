@@ -13,6 +13,11 @@ namespace OpenDayDialogue
 
     public class Binary
     {
+        /// <summary>
+        /// The version of the binary file that this interpreter can understand.
+        /// </summary>
+        public const uint Version = 3;
+        
         public Dictionary<uint, string> stringTable; // id number, value string
         public Dictionary<uint, Value> valueTable; // id number, value Value
         public Dictionary<string, string> definitions; // key string, value string
@@ -35,6 +40,9 @@ namespace OpenDayDialogue
             {
                 if (Encoding.UTF8.GetString(br.ReadBytes(4)) != "OPDA")
                     throw new OpenDayDialogueException("Invalid header");
+                
+                if (br.ReadUInt32() != Version)
+                    throw new OpenDayDialogueException("Version of the binary file is not compatible with this version of the interpreter.");
 
                 // Read string table
                 int stringTableCount = br.ReadInt32();
