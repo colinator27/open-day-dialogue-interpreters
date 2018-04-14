@@ -1,6 +1,6 @@
 ## Unity interpreter
 
-If you wish to use the Unity interpreter, you only need to copy the `Assets -> Scripts -> Open Day Dialogue` folder/directory.
+If you wish to use the Unity interpreter, you only need to copy the `Assets -> Scripts -> Open Day Dialogue` folder/directory into your project(s).
 The rest is example code.
 
 Read the wiki for information on how to set this up for your Unity project.

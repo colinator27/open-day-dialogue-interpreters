@@ -1,0 +1,1 @@
+global.odd_binary = odd_load_binary("example.opdac");

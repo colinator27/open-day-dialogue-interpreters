@@ -1,0 +1,1 @@
+show_error("[Open Day Dialogue] " + argument0, true);
