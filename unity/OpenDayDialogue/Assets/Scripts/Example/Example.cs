@@ -61,7 +61,7 @@ public class Example : MonoBehaviour
 			});
 
 		// Get control text
-		controlsText.text = interpreter.GetDefinition("example.menu.label.control_spacebar") + "\n" + interpreter.GetDefinition("example.menu.label.control_arrows");
+		controlsText.text = interpreter.GetDefinitionString("example.menu.label.control_spacebar") + "\n" + interpreter.GetDefinitionString("example.menu.label.control_arrows");
 
 		// Run the scene
 		interpreter.RunScene("example.test");

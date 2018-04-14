@@ -16,7 +16,8 @@ namespace OpenDayDialogue
             Boolean = 3,
             Undefined = 4,
             Variable = 5,
-            RawIdentifier = 6
+            RawIdentifier = 6,
+            Array = 7
         }
 
         public Type type;
@@ -26,6 +27,7 @@ namespace OpenDayDialogue
         public bool valueBoolean;
         public string valueVariable;
         public string valueRawIdentifier;
+        public List<Value> valueArray;
 
         public Value()
         {
@@ -54,6 +56,8 @@ namespace OpenDayDialogue
                 case Value.Type.RawIdentifier:
                     valueRawIdentifier = b.stringTable[br.ReadUInt32()];
                     break;
+                default:
+                    throw new Exception("Invalid value type from binary");
             }
         }
 
@@ -132,12 +136,6 @@ namespace OpenDayDialogue
                                 type = type,
                                 valueString = (valueBoolean ? "true" : "false")
                             };
-                    }
-                    break;
-                case Value.Type.Variable:
-                    if(interpreter != null)
-                    {
-                        return interpreter.ResolveVariable(valueVariable).ConvertTo(type);
                     }
                     break;
                 case Value.Type.Undefined:

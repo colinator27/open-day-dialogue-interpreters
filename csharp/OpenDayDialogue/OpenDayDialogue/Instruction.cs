@@ -17,6 +17,7 @@ namespace OpenDayDialogue
             Push = 0xA0, // operand1: value id
             Pop = 0xA1,
             Convert = 0xA2, // operand1: short number of new type, of Value.Type
+            Duplicate = 0xA3, // Pushes a copy of the top value of the stack to the stack (duplicates).
 
             // Builtin operators
             BOAdd = 0xC0,
@@ -43,6 +44,10 @@ namespace OpenDayDialogue
             CommandRun = 0xB3, // operand1: command id from command table
             SetVariable = 0xB4, // operand1: variable name id. Uses top value on stack
             CallFunction = 0xB5, // operand1: function name id. Used for non-builitin functions
+            MakeArray = 0xBC, // operand1: count of initial indices. Initializes array to a Value and pushes
+            SetArrayIndex = 0xBD, // First the array is pushed, then the value, then the index (3 items prepared on stack for this function). Index will be popped off.
+            PushArrayIndex = 0xBE, // Pushes the value of an index in array, using the values on the stack for array and index. On the top of stack should be index. The instruction pops off the original Value/array as well.
+            PushVariable = 0xBF, // operand1: variable name id. Pushes a variable's Value to the stack.
 
             // jump if top val of stack is true, pop it off
             JumpTrue = 0xB6, // operand1: label id
@@ -90,6 +95,8 @@ namespace OpenDayDialogue
                 case Opcode.JumpFalse:
                 case Opcode.ChoiceSelection:
                 case Opcode.DebugLine:
+                case Opcode.MakeArray:
+                case Opcode.PushVariable:
                     operand1 = br.ReadUInt32();
                     break;
                 case Opcode.Choice:

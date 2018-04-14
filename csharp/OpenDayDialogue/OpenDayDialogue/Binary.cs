@@ -16,11 +16,11 @@ namespace OpenDayDialogue
         /// <summary>
         /// The version of the binary file that this interpreter can understand.
         /// </summary>
-        public const uint Version = 3;
+        public const uint Version = 4;
         
         public Dictionary<uint, string> stringTable; // id number, value string
         public Dictionary<uint, Value> valueTable; // id number, value Value
-        public Dictionary<string, string> definitions; // key string, value string
+        public Dictionary<string, Value> definitions; // key string, value string
         public Dictionary<uint, Command> commands; // id number, command
         public Dictionary<string, uint> scenes; // name string, bytecode label number
         public Dictionary<uint, int> labels; // id number, bytecode label location number
@@ -30,7 +30,7 @@ namespace OpenDayDialogue
         {
             stringTable = new Dictionary<uint, string>();
             valueTable = new Dictionary<uint, Value>();
-            definitions = new Dictionary<string, string>();
+            definitions = new Dictionary<string, Value>();
             commands = new Dictionary<uint, Command>();
             scenes = new Dictionary<string, uint>();
             labels = new Dictionary<uint, int>();
@@ -67,7 +67,7 @@ namespace OpenDayDialogue
                 for (int i = 0; i < definitionCount; i++)
                 {
                     string key = stringTable[br.ReadUInt32()];
-                    string value = stringTable[br.ReadUInt32()];
+                    Value value = valueTable[br.ReadUInt32()];
                     definitions[key] = value;
                 }
 

@@ -16,52 +16,42 @@ namespace example:
 		label.control_spacebar="Press spacebar to advance dialogue and select chocies."
 		label.control_arrows="Use left and right arrow keys to navigate choices."
 	scene test:
-		char TestPerson
-		"Hello, world!"
-		char AnotherPerson
-		"It seems that it works?"
-		char TestPerson
-		"Yay!"
-		char Player
-		"Hmmm..."
+		TestPerson: "Hello, world!"
+		AnotherPerson: "It seems that it works?"
+		TestPerson: "Yay!"
+        
+        // Label for jumping back to later
+        example_test_hmm:
+        
+		Player: "Hmmm..."
 		choice:
 			"So, like, how does this work?":
-				char TestPerson
-				"This dialogue is compiled bytecode!"
-				char Player
-				"Whoa."
-				char AnotherPerson
-				"Someone used the Open Day Dialogue compiler to generate it."
-				char Player
-				"Huh."
+				TestPerson: "This dialogue is compiled bytecode!"
+				Player: "Whoa."
+				AnotherPerson: "Someone used the Open Day Dialogue compiler to generate it."
+				Player: "Huh."
 			"Can we just end this scene?":
-				char TestPerson
-				"Of course!"
+				TestPerson: "Of course!"
 				exit
+            "Can we jump to me talking for the first time?":
+                TestPerson: "Yeah!"
+                : example_test_hmm
 			"Anything cool we can do here?":
-				char TestPerson
-				"Yeah."
-				"We can make the background change colors!"
-				"Okay, so here goes. I'll change it to red."
+				TestPerson: "Yeah."
+				 "We can make the background change colors!"
+				 "Okay, so here goes. I'll change it to red."
 				bg red
-				char Player
-				"Wow."
-				"Cool."
-				char TestPerson
-				"I'll change it to grey now."
+				Player: "Wow."
+				 "Cool."
+				TestPerson: "I'll change it to grey now."
 				bg grey
-				char Player
-				"Nice."
-				char AnotherPerson
-				"Enough of this nonsense!"
-				"Back to the original color."
+				Player: "Nice."
+				AnotherPerson: "Enough of this nonsense!"
+				 "Back to the original color."
 				bg black
-		char Player
-		"So."
-		"Is that it?"
-		char TestPerson
-		"I guess so."
-		"See you around!"
-		char AnotherPerson
-		"Seeya!"
+		Player: "So."
+		 "Is that it?"
+		TestPerson: "I guess so."
+		 "See you around!"
+		AnotherPerson: "Seeya!"
 ```

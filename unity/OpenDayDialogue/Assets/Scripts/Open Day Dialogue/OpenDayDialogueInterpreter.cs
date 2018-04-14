@@ -35,6 +35,9 @@ namespace OpenDayDialogue
         private bool inChoice;
         private bool pause;
 
+        /// <summary>
+        /// Initializes a new interpreter, given a binary and other options.
+        /// </summary>
         public Interpreter(Binary binary, VariableStore variableStore, FunctionHandler functionHandler, CommandHandler commandHandler, 
                             HandleText handleText = null, HandleChoice handleChoice = null, TextProcessor textMainProcessor = null,
                             TextProcessor textChoiceProcessor = null, TextProcessor textDefinitionProcessor = null)
@@ -59,6 +62,10 @@ namespace OpenDayDialogue
             debugCurrentLine = -1;
         }
 
+        /// <summary>
+        /// Selects a choice and branches to its code. If the interpreter is paused, this will resume it.
+        /// </summary>
+        /// <param name="index">The index of the selection</param>
         public void SelectChoice(int index)
         {
             if(!inChoice)
@@ -70,17 +77,25 @@ namespace OpenDayDialogue
             currentChoices.Clear();
         }
 
+        /// <summary>
+        /// Halts the interpreter where it is.
+        /// </summary>
         public void Pause()
         {
             pause = true;
         }
 
+        /// <summary>
+        /// Resumes the interpreter.
+        /// </summary>
         public void Resume()
         {
             pause = false;
         }
 
-        // Runs through as much code as it can until it exits or hits a pause
+        /// <summary>
+        /// Runs through as much code as it can until it exits or hits a pause.
+        /// </summary>
         public void Update()
         {
             if(currentScene != null)
@@ -92,6 +107,10 @@ namespace OpenDayDialogue
             }
         }
 
+        /// <summary>
+        /// Jumps to a scene's code and starts it. If the interpreter was paused, this will resume it.
+        /// </summary>
+        /// <param name="name">The name of the scene to run</param>
         public void RunScene(string name)
         {
             if(!binary.scenes.ContainsKey(name))
@@ -105,6 +124,9 @@ namespace OpenDayDialogue
             pause = false;
         }
 
+        /// <summary>
+        /// Stops/exits the current scene, pausing the interpreter.
+        /// </summary>
         public void StopScene()
         {
             currentText = null;
@@ -115,29 +137,48 @@ namespace OpenDayDialogue
             pause = true;
         }
 
-        public string GetDefinition(string key)
+        /// <summary>
+        /// Gets a definition from the binary's definition table.
+        /// </summary>
+        /// <param name="key">The key for the definition</param>
+        public Value GetDefinition(string key)
         {
-            string value = binary.definitions[key];
-            if(textDefinitionProcessor != null)
-                value = textDefinitionProcessor(value);
+            Value value = binary.definitions[key];
+            if(textDefinitionProcessor != null && value.type == Value.Type.String)
+                value = new Value() { type = Value.Type.String, valueString = textDefinitionProcessor(value.valueString) };
             return value;
         }
 
+        /// <summary>
+        /// Gets a definition from the binary's definition table, but specifically as a string.
+        /// </summary>
+        /// <param name="key">The key for the definition</param>
+        public string GetDefinitionString(string key)
+        {
+            Value v = GetDefinition(key);
+            if (v.type != Value.Type.String)
+                throw new OpenDayDialogueException("Definition is not a string");
+            return v.valueString;
+        }
+
+        /// <summary>
+        /// Resolves a variable's value by name.
+        /// </summary>
         public Value ResolveVariable(string name)
         {
             return variableStore.GetVariable(name);
         }
 
-        // Pops the value from the top of the stack, and resolves variables
+        // Pops the value from the top of the stack
         private Value PopValue()
         {
-            Value v = stack.Pop();
-            if(v.type == Value.Type.Variable)
-                return ResolveVariable(v.valueVariable);
-            else
-                return v;
+            return stack.Pop();
         }
 
+        /// <summary>
+        /// Runs an instruction on the interpreter.
+        /// </summary>
+        /// <param name="inst">The instruction to run</param>
         public void RunInstruction(Instruction inst)
         {
             switch(inst.opcode)
@@ -154,6 +195,9 @@ namespace OpenDayDialogue
                         Value.Type newType = (Value.Type)((uint)inst.operand1);
                         stack.Push(oldValue.ConvertTo(newType, this));
                     }
+                    break;
+                case Instruction.Opcode.Duplicate:
+                    stack.Push(stack.Peek());
                     break;
                 case Instruction.Opcode.BOAdd:
                     {
@@ -498,6 +542,36 @@ namespace OpenDayDialogue
                     break;
                 case Instruction.Opcode.DebugLine:
                     debugCurrentLine = (int)((uint)inst.operand1);
+                    break;
+                case Instruction.Opcode.PushVariable:
+                    stack.Push(ResolveVariable(binary.stringTable[(uint)inst.operand1]));
+                    break;
+                case Instruction.Opcode.MakeArray:
+                    stack.Push(new Value()
+                    {
+                        type = Value.Type.Array,
+                        valueArray = new List<Value>((int)((uint)inst.operand1))
+                    });
+                    break;
+                case Instruction.Opcode.SetArrayIndex:
+                    {
+                        int index = stack.Pop().ConvertTo(Value.Type.Int32).valueInt32;
+                        Value val = stack.Pop();
+                        Value array = stack.Pop();
+                        if (array.type != Value.Type.Array)
+                            throw new OpenDayDialogueException("Cannot perform array operations on a non-array Value");
+                        array.valueArray[index] = val;
+                        stack.Push(array);
+                    }
+                    break;
+                case Instruction.Opcode.PushArrayIndex:
+                    {
+                        int index = stack.Pop().ConvertTo(Value.Type.Int32).valueInt32;
+                        Value array = stack.Pop();
+                        if (array.type != Value.Type.Array)
+                            throw new OpenDayDialogueException("Cannot perform array operations on a non-array Value");
+                        stack.Push(array.valueArray[index]);
+                    }
                     break;
             }
         }

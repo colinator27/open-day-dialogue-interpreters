@@ -28,6 +28,12 @@
 /* 1 byte, character */
 typedef char ODDchar;
 
+/* signed 16-bit integer */
+typedef short ODDint16;
+
+/* unsigned 16-bit integer */
+typedef unsigned short ODDuint16;
+
 /* signed 32-bit integer */
 typedef int ODDint32;
 
@@ -62,6 +68,8 @@ typedef unsigned short ODD_STATE;
 #define ODD_STATE_FAILURE_UNKNOWN 0x0001
 #define ODD_STATE_INVALID_PARAMETERS 0x0002
 #define ODD_STATE_INVALID_BINARY 0x0003
+#define ODD_STATE_INVALID_BINARY_VERSION 0x0100
+#define ODD_STATE_INVALID_BINARY_HEADER 0x0101
 
 /// BEGIN FUNCTION DEFINITIONS ///
 
