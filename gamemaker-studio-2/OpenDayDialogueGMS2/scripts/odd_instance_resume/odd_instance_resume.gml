@@ -1,5 +1,5 @@
 /// @description Resumes the interpreter.
-/// @param vm
+/// @param instance
 
-var vm = argument0;
-vm.pause = false;
+var instance = argument0;
+instance.pause = false;

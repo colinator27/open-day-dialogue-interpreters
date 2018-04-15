@@ -3,34 +3,39 @@
 /// @param variableStore_setVariable
 /// @param variableStore_getVariable
 /// @param variableStore_cleanUp
+/// @param optional_handleText
+/// @param optional_handleChoice
+/// @param optional_textMainProcessor
+/// @param optional_textChoiceProcessor
+/// @param optional_textDefinitionProcessor
 
-var vm = __odd_instance_create(odd_vm);
+var instance = __odd_instance_create(odd_instance);
 
 // Assign variables
-vm.binary = argument[0];
-vm.variableStore_setVariable = argument[1];
-vm.variableStore_getVariable = argument[2];
-vm.variableStore_cleanUp = argument[3];
+instance.binary = argument[0];
+instance.variableStore_setVariable = argument[1];
+instance.variableStore_getVariable = argument[2];
+instance.variableStore_cleanUp = argument[3];
 
 if (argument_count > 4)
 {
-	vm.handleText = argument[4];
+	instance.handleText = argument[4];
 	if (argument_count > 5)
 	{
-		vm.handleChoice = argument[5];
+		instance.handleChoice = argument[5];
 		if (argument_count > 6)
 		{
-			vm.textMainProcessor = argument[6];
+			instance.textMainProcessor = argument[6];
 			if (argument_count > 7)
 			{
-				vm.textChoiceProcessor = argument[7];
+				instance.textChoiceProcessor = argument[7];
 				if (argument_count > 8)
 				{
-					vm.textDefinitionProcessor = argument[8];
+					instance.textDefinitionProcessor = argument[8];
 				}
 			}
 		}
 	}
 }
 
-return vm;
+return instance;

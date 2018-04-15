@@ -1,5 +1,5 @@
 /// @description Gets the reference to the variable store setter script in an instance.
-/// @param vm
+/// @param instance
 
-var vm = argument0;
-return vm.variableStore_setVariable;
+var instance = argument0;
+return instance.variableStore_setVariable;

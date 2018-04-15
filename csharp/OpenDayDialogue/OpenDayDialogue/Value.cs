@@ -74,12 +74,17 @@ namespace OpenDayDialogue
                         case Value.Type.Int32:
                             return new Value() {
                                 type = type,
-                                valueInt32 = (int)(this.valueDouble)
+                                valueInt32 = Convert.ToInt32(this.valueDouble)
                             };
                         case Value.Type.String:
                             return new Value() {
                                 type = type,
                                 valueString = this.valueDouble.ToString()
+                            };
+                        case Value.Type.Boolean:
+                            return new Value() {
+                                type = type,
+                                valueBoolean = (this.valueDouble != 0)
                             };
                     }
                     break;
@@ -95,6 +100,11 @@ namespace OpenDayDialogue
                             return new Value() {
                                 type = type,
                                 valueString = this.valueInt32.ToString()
+                            };
+                        case Value.Type.Boolean:
+                            return new Value() {
+                                type = type,
+                                valueBoolean = (this.valueInt32 != 0)
                             };
                     }
                     break;
@@ -231,7 +241,7 @@ namespace OpenDayDialogue
                     };
                 case Value.Type.Int32:
                     return new Value() {
-                        type = a.type,
+                        type = Value.Type.Double,
                         valueDouble = (double)a.valueInt32 / (double)b.valueInt32
                     };
             }
@@ -255,7 +265,7 @@ namespace OpenDayDialogue
                         valueDouble = (double)a.valueInt32 % (double)b.valueInt32
                     };
             }
-            throw new OpenDayDialogueException(string.Format("Cannot divide with type {0}.", a.type));
+            throw new OpenDayDialogueException(string.Format("Cannot peform modulo with type {0}.", a.type));
         }
 
         public static bool IsEqual(Value a, Value b)
@@ -272,6 +282,8 @@ namespace OpenDayDialogue
                     return a.valueString == b.valueString;
                 case Value.Type.Boolean:
                     return a.valueBoolean == b.valueBoolean;
+                case Value.Type.Undefined:
+                    return true;
             }
             throw new OpenDayDialogueException(string.Format("Cannot check equality with type {0}.", a.type));
         }
@@ -290,6 +302,8 @@ namespace OpenDayDialogue
                     return a.valueString != b.valueString;
                 case Value.Type.Boolean:
                     return a.valueBoolean != b.valueBoolean;
+                case Value.Type.Undefined:
+                    return false;
             }
             throw new OpenDayDialogueException(string.Format("Cannot check inequality with type {0}.", a.type));
         }

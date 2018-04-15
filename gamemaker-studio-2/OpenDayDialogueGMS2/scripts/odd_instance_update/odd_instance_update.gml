@@ -1,15 +1,15 @@
 /// @description Runs through as much code as it can until it exits or hits a pause.
-/// @param vm
+/// @param instance
 
-var vm = argument0;
+var instance = argument0;
 
-with (vm)
+with (instance)
 {
 	if (currentScene != undefined)
 	{
 		while (!pause)
 		{
-			odd_instance_run_instruction(vm, binary.instructions[programCounter++]);
+			odd_instance_run_instruction(instance, binary.instructions[programCounter++]);
 		}
 	}
 }

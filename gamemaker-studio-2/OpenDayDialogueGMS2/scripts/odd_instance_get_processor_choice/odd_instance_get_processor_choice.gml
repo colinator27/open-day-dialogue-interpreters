@@ -1,5 +1,5 @@
 /// @description Gets the reference to the choice text processor script in an instance.
-/// @param vm
+/// @param instance
 
-var vm = argument0;
-return vm.textChoiceProcessor;
+var instance = argument0;
+return instance.textChoiceProcessor;

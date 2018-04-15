@@ -1,11 +1,11 @@
 /// @description Selects a choice and branches to its code. If the interpreter is paused, this will resume it.
-/// @param vm
+/// @param instance
 /// @param index The index of the selection
 
-var vm = argument0;
+var instance = argument0;
 var index = argument1;
 
-with(vm)
+with(instance)
 {
 	if (!inChoice)
 		return;

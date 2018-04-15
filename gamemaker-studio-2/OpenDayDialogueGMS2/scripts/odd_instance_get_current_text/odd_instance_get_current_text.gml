@@ -1,5 +1,5 @@
 /// @description Get the current text being "displayed".
-/// @param vm
+/// @param instance
 
-var vm = argument0;
-return vm.currentText;
+var instance = argument0;
+return instance.currentText;

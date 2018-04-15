@@ -1,5 +1,5 @@
 /// @description Gets the reference/ID to the binary file reference in memory, in an instance.
-/// @param vm
+/// @param instance
 
-var vm = argument0;
-return vm.binary;
+var instance = argument0;
+return instance.binary;

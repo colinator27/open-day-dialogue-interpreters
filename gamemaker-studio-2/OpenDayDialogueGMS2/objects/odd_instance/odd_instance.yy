@@ -2,7 +2,7 @@
     "id": "6cd57dbd-1b21-4a34-9e6e-1e7876157424",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "odd_vm",
+    "name": "odd_instance",
     "eventList": [
         {
             "id": "63f1c509-1b24-414c-88c5-15ea696b6da6",

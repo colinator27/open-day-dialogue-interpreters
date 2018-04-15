@@ -246,7 +246,7 @@ namespace OpenDayDialogue
                         Value val2 = PopValue();
                         Value val1 = PopValue();
 
-                        if((val1.type == Value.Type.Double && val2.type == Value.Type.Int32))
+                        if(val1.type == Value.Type.Double && val2.type == Value.Type.Int32)
                         {
                             // Convert second number to first
                             stack.Push(val1 - val2.ConvertTo(val1.type, this));
@@ -262,7 +262,7 @@ namespace OpenDayDialogue
                         Value val2 = PopValue();
                         Value val1 = PopValue();
 
-                        if((val1.type == Value.Type.Double && val2.type == Value.Type.Int32))
+                        if(val1.type == Value.Type.Double && val2.type == Value.Type.Int32)
                         {
                             // Convert second number to first
                             stack.Push(val1 * val2.ConvertTo(val1.type, this));
@@ -278,7 +278,7 @@ namespace OpenDayDialogue
                         Value val2 = PopValue();
                         Value val1 = PopValue();
 
-                        if((val1.type == Value.Type.Double && val2.type == Value.Type.Int32))
+                        if(val1.type == Value.Type.Double && val2.type == Value.Type.Int32)
                         {
                             // Convert second number to first
                             stack.Push(val1 / val2.ConvertTo(val1.type, this));
@@ -294,7 +294,7 @@ namespace OpenDayDialogue
                         Value val2 = PopValue();
                         Value val1 = PopValue();
 
-                        if((val1.type == Value.Type.Double && val2.type == Value.Type.Int32))
+                        if(val1.type == Value.Type.Double && val2.type == Value.Type.Int32)
                         {
                             // Convert second number to first
                             stack.Push(val1 % val2.ConvertTo(val1.type, this));
@@ -310,7 +310,7 @@ namespace OpenDayDialogue
                         Value val2 = PopValue();
                         Value val1 = PopValue();
 
-                        if((val1.type == Value.Type.Double && val2.type == Value.Type.Int32))
+                        if(val1.type == Value.Type.Double && val2.type == Value.Type.Int32)
                         {
                             // Convert second number to first
                             stack.Push(new Value(){ type = Value.Type.Boolean, valueBoolean = Value.IsEqual(val1, val2.ConvertTo(val1.type, this)) });
@@ -326,7 +326,7 @@ namespace OpenDayDialogue
                         Value val2 = PopValue();
                         Value val1 = PopValue();
 
-                        if((val1.type == Value.Type.Double && val2.type == Value.Type.Int32))
+                        if(val1.type == Value.Type.Double && val2.type == Value.Type.Int32)
                         {
                             // Convert second number to first
                             stack.Push(new Value(){ type = Value.Type.Boolean, valueBoolean = Value.IsNotEqual(val1, val2.ConvertTo(val1.type, this)) });
@@ -342,7 +342,7 @@ namespace OpenDayDialogue
                         Value val2 = PopValue();
                         Value val1 = PopValue();
 
-                        if((val1.type == Value.Type.Double && val2.type == Value.Type.Int32))
+                        if(val1.type == Value.Type.Double && val2.type == Value.Type.Int32)
                         {
                             // Convert second number to first
                             stack.Push(new Value(){ type = Value.Type.Boolean, valueBoolean = (val1 > val2.ConvertTo(val1.type, this)) });
@@ -358,7 +358,7 @@ namespace OpenDayDialogue
                         Value val2 = PopValue();
                         Value val1 = PopValue();
 
-                        if((val1.type == Value.Type.Double && val2.type == Value.Type.Int32))
+                        if(val1.type == Value.Type.Double && val2.type == Value.Type.Int32)
                         {
                             // Convert second number to first
                             stack.Push(new Value(){ type = Value.Type.Boolean, valueBoolean = (val1 >= val2.ConvertTo(val1.type, this)) });
@@ -374,7 +374,7 @@ namespace OpenDayDialogue
                         Value val2 = PopValue();
                         Value val1 = PopValue();
 
-                        if((val1.type == Value.Type.Double && val2.type == Value.Type.Int32))
+                        if(val1.type == Value.Type.Double && val2.type == Value.Type.Int32)
                         {
                             // Convert second number to first
                             stack.Push(new Value(){ type = Value.Type.Boolean, valueBoolean = (val1 < val2.ConvertTo(val1.type, this)) });
@@ -390,7 +390,7 @@ namespace OpenDayDialogue
                         Value val2 = PopValue();
                         Value val1 = PopValue();
 
-                        if((val1.type == Value.Type.Double && val2.type == Value.Type.Int32))
+                        if(val1.type == Value.Type.Double && val2.type == Value.Type.Int32)
                         {
                             // Convert second number to first
                             stack.Push(new Value(){ type = Value.Type.Boolean, valueBoolean = (val1 <= val2.ConvertTo(val1.type, this)) });
@@ -470,6 +470,7 @@ namespace OpenDayDialogue
                     currentScene = null;
                     currentText = null;
                     currentChoices.Clear();
+                    inChoice = false;
                     stack.Clear();
                     pause = true;
                     break;
@@ -549,6 +550,8 @@ namespace OpenDayDialogue
                         if(currentChoices.Count == 0)
                         {
                             programCounter = binary.labels[(uint)inst.operand1];
+                            inChoice = false;
+                            break;
                         }
                         inChoice = true;
                         pause = true;
@@ -585,8 +588,13 @@ namespace OpenDayDialogue
                         Value array = stack.Pop();
                         if (array.type != Value.Type.Array)
                             throw new OpenDayDialogueException("Cannot perform array operations on a non-array Value");
-                        array.valueArray[index] = val;
-                        stack.Push(array);
+                        List<Value> realArray = array.valueArray;
+                        realArray[index] = val;
+                        stack.Push(new Value()
+                        {
+                            type = Value.Type.Array,
+                            valueArray = realArray
+                        });
                     }
                     break;
                 case Instruction.Opcode.PushArrayIndex:

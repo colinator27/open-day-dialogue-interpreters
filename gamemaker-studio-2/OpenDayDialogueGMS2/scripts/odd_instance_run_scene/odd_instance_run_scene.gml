@@ -1,11 +1,11 @@
 /// @description Jumps to a scene's code and starts it. If the interpreter was paused, this will resume it.
-/// @param vm
-/// @param name The name of the scene to run
+/// @param instance
+/// @param name
 
-var vm = argument0;
+var instance = argument0;
 var name = argument1;
 
-with (vm)
+with (instance)
 {
 	if (!ds_map_exists(binary.scenes, name))
 	{

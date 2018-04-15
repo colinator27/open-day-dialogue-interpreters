@@ -1,5 +1,5 @@
 /// @description Get the name of the current scene being run.
-/// @param vm
+/// @param instance
 
-var vm = argument0;
-return vm.currentScene;
+var instance = argument0;
+return instance.currentScene;

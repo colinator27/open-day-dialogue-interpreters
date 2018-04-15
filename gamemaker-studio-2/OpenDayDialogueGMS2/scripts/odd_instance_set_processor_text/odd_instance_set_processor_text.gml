@@ -1,7 +1,7 @@
 /// @description Sets the text processor handler script in an instance.
-/// @param vm
+/// @param instance
 /// @param script
 
-var vm = argument0;
+var instance = argument0;
 var script = argument1;
-vm.textMainProcessor = script;
+instance.textMainProcessor = script;
