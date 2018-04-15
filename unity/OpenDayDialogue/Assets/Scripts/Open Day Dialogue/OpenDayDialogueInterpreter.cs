@@ -34,7 +34,27 @@ namespace OpenDayDialogue
         private List<DialogueChoice> currentChoices;
         private bool inChoice;
         private bool pause;
+        
+        /// <summary>
+        /// The name of the current scene being run.
+        /// </summary>
+        public string CurrentScene { get { return currentScene; } }
 
+        /// <summary>
+        /// The current text being "displayed".
+        /// </summary>
+        public string CurrentText { get { return currentText; } }
+
+        /// <summary>
+        /// Whether or not the interpreter is paused, usually waiting for input.
+        /// </summary>
+        public bool IsPaused { get { return pause; } }
+
+        /// <summary>
+        /// Whether or not the interpreter is currently in a choice, waiting for input.
+        /// </summary>
+        public bool IsInChoice { get { return inChoice; } }
+        
         /// <summary>
         /// Initializes a new interpreter, given a binary and other options.
         /// </summary>
@@ -113,12 +133,13 @@ namespace OpenDayDialogue
         /// <param name="name">The name of the scene to run</param>
         public void RunScene(string name)
         {
-            if(!binary.scenes.ContainsKey(name))
-                return;
+            if (!binary.scenes.ContainsKey(name))
+                throw new OpenDayDialogueException(string.Format("Scene with name \"{0}\" does not exist.", name));
             programCounter = binary.labels[binary.scenes[name]];
             currentScene = name;
             currentText = null;
             currentChoices.Clear();
+            inChoice = false;
             stack.Clear();
             debugCurrentLine = -1;
             pause = false;
@@ -143,6 +164,8 @@ namespace OpenDayDialogue
         /// <param name="key">The key for the definition</param>
         public Value GetDefinition(string key)
         {
+            if (!binary.definitions.ContainsKey(key))
+                return null;            
             Value value = binary.definitions[key];
             if(textDefinitionProcessor != null && value.type == Value.Type.String)
                 value = new Value() { type = Value.Type.String, valueString = textDefinitionProcessor(value.valueString) };
@@ -156,6 +179,8 @@ namespace OpenDayDialogue
         public string GetDefinitionString(string key)
         {
             Value v = GetDefinition(key);
+            if (v == null)
+                return null;
             if (v.type != Value.Type.String)
                 throw new OpenDayDialogueException("Definition is not a string");
             return v.valueString;

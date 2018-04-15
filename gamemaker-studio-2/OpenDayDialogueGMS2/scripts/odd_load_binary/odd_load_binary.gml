@@ -2,12 +2,12 @@
 /// @param filename
 
 // Ensure parameters are valid
-var param_filename = argument0;
-__odd_assert(is_string(param_filename), "Expected string for \"filename\" parameter");
+var filename = argument0;
+__odd_assert(is_string(filename), "Expected string for \"filename\" parameter");
 
 // Load file
-__odd_assert(file_exists(param_filename), "File with name \"" + param_filename + "\" does not exist.");
-var buff = buffer_load(param_filename);
+__odd_assert(file_exists(filename), "File with name \"" + filename + "\" does not exist.");
+var buff = buffer_load(filename);
 
 // Make sure header is readable
 __odd_assert(buffer_get_size(buff) >= 8, "Invalid or corrupt file: file size too small.");
