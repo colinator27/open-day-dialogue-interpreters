@@ -245,7 +245,7 @@ with (instance)
 			var args = odd_command_args(cmd);
 			if (!ds_map_exists(commandHandlers, name))
 				__odd_error("Undefined command with name \"" + name + "\".");
-			script_execute(commandHandlers[name], args);
+			script_execute(commandHandlers[? name], args);
 			break;
 		case odd_opcode.SetVariable:
 			script_execute(variableStore_setVariable, binary.stringTable[? odd_instruction_op1(inst)], ds_stack_pop(stack));

@@ -1,0 +1,1 @@
+global.odd_variables[? argument0] = argument1;

@@ -1,0 +1,1 @@
+return odd_instance_get_definition_string(global.odd_instance, argument0);

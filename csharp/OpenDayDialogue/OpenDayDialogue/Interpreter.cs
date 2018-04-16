@@ -153,6 +153,7 @@ namespace OpenDayDialogue
             currentText = null;
             currentScene = null;
             currentChoices.Clear();
+            inChoice = false;
             stack.Clear();
             debugCurrentLine = -1;
             pause = true;

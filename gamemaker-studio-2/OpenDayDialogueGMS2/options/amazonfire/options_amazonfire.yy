@@ -41,6 +41,7 @@
     "option_amazonfire_sync_android": false,
     "option_amazonfire_target_sdk": 23,
     "option_amazonfire_texture_page": "2048x2048",
+    "option_amazonfire_tools_from_version": false,
     "option_amazonfire_version": {
         "build": 0,
         "major": 1,

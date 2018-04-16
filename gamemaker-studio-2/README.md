@@ -1,9 +1,9 @@
 ## GameMaker Studio 2 interpreter
 
-**WARNING: INCOMPLETE AND NOT READY FOR USE.**
-
 If you wish to use the GMS2 interpreter, you only need to copy the `Open Day Dialogue` folders/directories into your project(s).
 The rest is example code.
+
+(If you wish to use this on GM:S 1.4, it *is* possible. You will need to update two scripts in `Scripts -> Open Day Dialogue -> Internal -> Not compatible with 1.4` to work. In one, change `instance_create_depth` to `instance_create`, and in the other, move the `#macro` statements into the project settings.)
 
 ## Example project
 
