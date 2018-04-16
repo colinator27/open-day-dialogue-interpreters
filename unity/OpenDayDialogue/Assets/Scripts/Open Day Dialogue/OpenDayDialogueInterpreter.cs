@@ -501,7 +501,17 @@ namespace OpenDayDialogue
                         {
                             args.Add(stack.Pop());
                         }
-                        functionHandler.RunFunction(name, args.ToArray());
+                        Value v = functionHandler.RunFunction(name, args.ToArray());
+                        if (v != null)
+                        {
+                            stack.Push(v);
+                        } else
+                        {
+                            stack.Push(new Value()
+                            {
+                                type = Value.Type.Undefined
+                            });
+                        }
                     }
                     break;
                 case Instruction.Opcode.JumpTrue:

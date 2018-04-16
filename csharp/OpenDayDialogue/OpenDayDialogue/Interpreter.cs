@@ -497,11 +497,21 @@ namespace OpenDayDialogue
                         string name = binary.stringTable[(uint)inst.operand1];
                         int argCount = stack.Pop().ConvertTo(Value.Type.Int32, this).valueInt32;
                         List<Value> args = new List<Value>();
-                        for(int i = 0; i < argCount; i++)
+                        for (int i = 0; i < argCount; i++)
                         {
                             args.Add(stack.Pop());
                         }
-                        functionHandler.RunFunction(name, args.ToArray());
+                        Value v = functionHandler.RunFunction(name, args.ToArray());
+                        if (v != null)
+                        {
+                            stack.Push(v);
+                        } else
+                        {
+                            stack.Push(new Value()
+                            {
+                                type = Value.Type.Undefined
+                            });
+                        }
                     }
                     break;
                 case Instruction.Opcode.JumpTrue:

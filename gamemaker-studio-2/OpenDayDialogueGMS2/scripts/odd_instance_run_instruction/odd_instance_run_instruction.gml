@@ -260,7 +260,11 @@ with (instance)
 			{
 				args[i] = ds_stack_pop(stack);
 			}
-			script_execute(functionHandlers[? name], args);
+			var v = script_execute(functionHandlers[? name], args);
+			if (!is_undefined(v) && is_array(v))
+				ds_stack_push(stack, v);
+			else
+				ds_stack_push(stack, odd_create_value(odd_type_undefined, undefined));
 			break;
 		case odd_opcode.JumpTrue:
 			if (odd_value_val(odd_value_convert(ds_stack_pop(stack), odd_type_boolean)) == true)
