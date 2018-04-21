@@ -86,6 +86,4 @@ for (var i = 0; i < instructionCount; i++)
 	}
 }
 
-buffer_delete(buff);
-
 return bin;
