@@ -497,7 +497,7 @@ namespace OpenDayDialogue
                         string name = binary.stringTable[(uint)inst.operand1];
                         int argCount = stack.Pop().ConvertTo(Value.Type.Int32, this).valueInt32;
                         List<Value> args = new List<Value>();
-                        for(int i = 0; i < argCount; i++)
+                        for (int i = 0; i < argCount; i++)
                         {
                             args.Add(stack.Pop());
                         }

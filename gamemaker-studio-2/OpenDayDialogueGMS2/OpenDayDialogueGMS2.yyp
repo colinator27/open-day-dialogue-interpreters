@@ -815,6 +815,14 @@
             }
         },
         {
+            "Key": "d0ec4108-0aee-4c10-8cce-dd2bf87ecddb",
+            "Value": {
+                "id": "b1c50ac3-ad94-4176-85d4-e3c1ea34101b",
+                "resourcePath": "scripts\\odd_load_binary_from_buffer\\odd_load_binary_from_buffer.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "d1bc35da-cc55-468e-999d-ec9670226c8a",
             "Value": {
                 "id": "24e6b536-cfeb-465b-9bd3-72518b97a81e",
@@ -999,6 +1007,7 @@
         "c29e5584-862e-4cd1-b8b5-e0c891f28d17",
         "3723de1e-b6f8-48ea-9e43-aeb0b879edce",
         "fdfd86eb-aa47-4e7c-b678-2b130107d003",
+        "d0ec4108-0aee-4c10-8cce-dd2bf87ecddb",
         "36c75b5d-aa26-4012-8038-e330d3518bf6",
         "f8170304-75dc-4f53-b303-26eb7be4b6b7",
         "bcfe5404-6e5a-4209-b428-cd9733b0f5b9",
