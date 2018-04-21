@@ -1,13 +1,6 @@
 /// @description Load a binary "file" from a pre-existing buffer and create a reference for it in memory.
 /// @param buffer
-/// @param filename
 
-// Ensure parameters are valid
-var filename = argument1;
-__odd_assert(is_string(filename), "Expected string for \"filename\" parameter");
-
-// Load file
-__odd_assert(file_exists(filename), "File with name \"" + filename + "\" does not exist.");
 var buff = argument0;
 
 // Make sure header is readable
