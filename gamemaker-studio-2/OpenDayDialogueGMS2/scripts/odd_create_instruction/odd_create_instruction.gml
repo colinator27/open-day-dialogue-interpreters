@@ -1,4 +1,4 @@
-/// @description Creates a new Command "object", returns its reference
+/// @description Creates a new Instruction "object", returns its reference
 /// @param opcode
 /// @param operand1
 /// @param operand2
