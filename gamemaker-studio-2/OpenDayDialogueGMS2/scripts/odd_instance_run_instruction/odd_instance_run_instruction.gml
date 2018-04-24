@@ -34,11 +34,11 @@ with (instance)
 				(val1type == odd_type_double && val2type == odd_type_int32))
 			{
 				// Convert second number to first
-				ds_stack_push(__odd_value_add(val1, odd_value_convert(val2, val1type)));
+				ds_stack_push(stack, __odd_value_add(val1, odd_value_convert(val2, val1type)));
 			} else
 			{
 				// Convert first number to second
-				ds_stack_push(__odd_value_add(odd_value_convert(val1, val2type), val2));
+				ds_stack_push(stack, __odd_value_add(odd_value_convert(val1, val2type), val2));
 			}
 			break;
 		case odd_opcode.BOSub:
@@ -51,11 +51,11 @@ with (instance)
 			if (val1type == odd_type_double && val2type == odd_type_int32)
 			{
 				// Convert second number to first
-				ds_stack_push(__odd_value_sub(val1, odd_value_convert(val2, val1type)));
+				ds_stack_push(stack, __odd_value_sub(val1, odd_value_convert(val2, val1type)));
 			} else
 			{
 				// Convert first number to second
-				ds_stack_push(__odd_value_sub(odd_value_convert(val1, val2type), val2));
+				ds_stack_push(stack, __odd_value_sub(odd_value_convert(val1, val2type), val2));
 			}
 			break;
 		case odd_opcode.BOMod:
@@ -68,11 +68,11 @@ with (instance)
 			if (val1type == odd_type_double && val2type == odd_type_int32)
 			{
 				// Convert second number to first
-				ds_stack_push(__odd_value_mod(val1, odd_value_convert(val2, val1type)));
+				ds_stack_push(stack, __odd_value_mod(val1, odd_value_convert(val2, val1type)));
 			} else
 			{
 				// Convert first number to second
-				ds_stack_push(__odd_value_mod(odd_value_convert(val1, val2type), val2));
+				ds_stack_push(stack, __odd_value_mod(odd_value_convert(val1, val2type), val2));
 			}
 			break;
 		case odd_opcode.BOEqual:
@@ -85,11 +85,11 @@ with (instance)
 			if (val1type == odd_type_double && val2type == odd_type_int32)
 			{
 				// Convert second number to first
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_equal(val1, odd_value_convert(val2, val1type))));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_equal(val1, odd_value_convert(val2, val1type))));
 			} else
 			{
 				// Convert first number to second
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_equal(odd_value_convert(val1, val2type), val2)));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_equal(odd_value_convert(val1, val2type), val2)));
 			}
 			break;
 		case odd_opcode.BONotEqual:
@@ -102,11 +102,11 @@ with (instance)
 			if (val1type == odd_type_double && val2type == odd_type_int32)
 			{
 				// Convert second number to first
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_not_equal(val1, odd_value_convert(val2, val1type))));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_not_equal(val1, odd_value_convert(val2, val1type))));
 			} else
 			{
 				// Convert first number to second
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_not_equal(odd_value_convert(val1, val2type), val2)));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_not_equal(odd_value_convert(val1, val2type), val2)));
 			}
 			break;
 		case odd_opcode.BOGreater:
@@ -119,11 +119,11 @@ with (instance)
 			if (val1type == odd_type_double && val2type == odd_type_int32)
 			{
 				// Convert second number to first
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_greater(val1, odd_value_convert(val2, val1type))));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_greater(val1, odd_value_convert(val2, val1type))));
 			} else
 			{
 				// Convert first number to second
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_greater(odd_value_convert(val1, val2type), val2)));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_greater(odd_value_convert(val1, val2type), val2)));
 			}
 			break;
 		case odd_opcode.BOGreaterEqual:
@@ -136,11 +136,11 @@ with (instance)
 			if (val1type == odd_type_double && val2type == odd_type_int32)
 			{
 				// Convert second number to first
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_greater_equal(val1, odd_value_convert(val2, val1type))));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_greater_equal(val1, odd_value_convert(val2, val1type))));
 			} else
 			{
 				// Convert first number to second
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_greater_equal(odd_value_convert(val1, val2type), val2)));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_greater_equal(odd_value_convert(val1, val2type), val2)));
 			}
 			break;
 		case odd_opcode.BOLessThan:
@@ -153,11 +153,11 @@ with (instance)
 			if (val1type == odd_type_double && val2type == odd_type_int32)
 			{
 				// Convert second number to first
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_less(val1, odd_value_convert(val2, val1type))));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_less(val1, odd_value_convert(val2, val1type))));
 			} else
 			{
 				// Convert first number to second
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_less(odd_value_convert(val1, val2type), val2)));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_less(odd_value_convert(val1, val2type), val2)));
 			}
 			break;
 		case odd_opcode.BOLessThanEqual:
@@ -170,11 +170,11 @@ with (instance)
 			if (val1type == odd_type_double && val2type == odd_type_int32)
 			{
 				// Convert second number to first
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_less_equal(val1, odd_value_convert(val2, val1type))));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_less_equal(val1, odd_value_convert(val2, val1type))));
 			} else
 			{
 				// Convert first number to second
-				ds_stack_push(odd_create_value(odd_type_boolean, __odd_value_is_less_equal(odd_value_convert(val1, val2type), val2)));
+				ds_stack_push(stack, odd_create_value(odd_type_boolean, __odd_value_is_less_equal(odd_value_convert(val1, val2type), val2)));
 			}
 			break;
 		case odd_opcode.BONegate:
@@ -182,10 +182,10 @@ with (instance)
 			switch(odd_value_type(val))
 			{
 				case odd_type_double:
-					ds_stack_push(odd_create_value(odd_type_double, -odd_value_val(val)));
+					ds_stack_push(stack, odd_create_value(odd_type_double, -odd_value_val(val)));
 					break;
 				case odd_type_int32:
-					ds_stack_push(odd_create_value(odd_type_int32, -odd_value_val(val)));
+					ds_stack_push(stack, odd_create_value(odd_type_int32, -odd_value_val(val)));
 					break;
 				default:
 					__odd_error("Cannot negate type " + __odd_type_to_string(odd_value_type(val)) + ".");
@@ -197,7 +197,7 @@ with (instance)
 			switch(odd_value_type(val))
 			{
 				case odd_type_boolean:
-					ds_stack_push(odd_create_value(odd_type_boolean, !odd_value_val(val)));
+					ds_stack_push(stack, odd_create_value(odd_type_boolean, !odd_value_val(val)));
 					break;
 				default:
 					__odd_error("Cannot invert type " + __odd_type_to_string(odd_value_type(val)) + ".");
