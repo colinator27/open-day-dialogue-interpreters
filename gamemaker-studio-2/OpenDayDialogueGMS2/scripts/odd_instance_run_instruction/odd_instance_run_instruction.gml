@@ -330,7 +330,7 @@ with (instance)
 			ds_stack_push(stack, script_execute(variableStore_getVariable, binary.stringTable[? odd_instruction_op1(inst)]));
 			break;
 		case odd_opcode.MakeArray:
-			ds_stack_push(odd_create_value(odd_type_array, array_create(odd_instruction_op1(inst))));
+			ds_stack_push(stack, odd_create_value(odd_type_array, array_create(odd_instruction_op1(inst))));
 			break;
 		case odd_opcode.SetArrayIndex:
 			var index = odd_value_val(odd_value_convert(ds_stack_pop(stack), odd_type_int32));
