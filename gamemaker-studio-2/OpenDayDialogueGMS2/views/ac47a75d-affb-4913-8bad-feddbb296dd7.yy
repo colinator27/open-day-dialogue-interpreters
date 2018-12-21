@@ -16,7 +16,8 @@
         "3588124b-f59a-4f54-a01f-c905c06da885",
         "00260169-d7ba-424b-86ff-447596325bbf",
         "df3df181-3fd2-4ad7-a668-75ffa37df412",
-        "7a586344-125d-4314-87ad-a95afb922f24"
+        "7a586344-125d-4314-87ad-a95afb922f24",
+        "b1061e0c-4a47-4d62-b083-9b324b6bc778"
     ],
     "filterType": "GMScript",
     "folderName": "Getters",

@@ -11,7 +11,8 @@
         "0b2618c8-d97b-4c19-826d-fd0bac5b833a",
         "79019ca7-e70c-4d9e-9ed7-93c9ddced567",
         "4e8716d0-76ef-436c-8ee9-3974b22a6834",
-        "3ad38882-7d06-46ed-8083-8134bd208b36"
+        "3ad38882-7d06-46ed-8083-8134bd208b36",
+        "48786a9f-2b46-45b3-89b2-3ad8f366a299"
     ],
     "filterType": "GMScript",
     "folderName": "Setters",

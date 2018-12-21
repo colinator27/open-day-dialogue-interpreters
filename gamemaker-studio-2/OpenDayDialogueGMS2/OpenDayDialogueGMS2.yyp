@@ -287,6 +287,14 @@
             }
         },
         {
+            "Key": "48786a9f-2b46-45b3-89b2-3ad8f366a299",
+            "Value": {
+                "id": "e3b94557-41cb-474b-a79b-6b083cea0d86",
+                "resourcePath": "scripts\\odd_instance_set_handler_scene_end\\odd_instance_set_handler_scene_end.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "4c4fce39-7cbf-46bd-8144-4612192802a9",
             "Value": {
                 "id": "7ef7b0be-255f-45ef-acfa-518133fcaef9",
@@ -703,6 +711,14 @@
             }
         },
         {
+            "Key": "b1061e0c-4a47-4d62-b083-9b324b6bc778",
+            "Value": {
+                "id": "6130f9bd-19a8-47bd-9222-0f0e8ce41ce6",
+                "resourcePath": "scripts\\odd_instance_get_handler_scene_end\\odd_instance_get_handler_scene_end.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "b667fba3-4efa-43ba-b0d3-814cc837990d",
             "Value": {
                 "id": "dd7c5599-921f-43cb-b207-5e28c2614657",
@@ -1035,6 +1051,7 @@
         "00260169-d7ba-424b-86ff-447596325bbf",
         "df3df181-3fd2-4ad7-a668-75ffa37df412",
         "7a586344-125d-4314-87ad-a95afb922f24",
+        "b1061e0c-4a47-4d62-b083-9b324b6bc778",
         "7d689864-e9ed-409d-9cfb-1b66c5eb479a",
         "30e6fd51-b194-4622-bd2d-f8d22ad69127",
         "89f3c640-e035-4df0-a74b-2d228d34d352",
@@ -1043,6 +1060,7 @@
         "79019ca7-e70c-4d9e-9ed7-93c9ddced567",
         "4e8716d0-76ef-436c-8ee9-3974b22a6834",
         "3ad38882-7d06-46ed-8083-8134bd208b36",
+        "48786a9f-2b46-45b3-89b2-3ad8f366a299",
         "dd97aa63-5d94-4a62-bf89-4e00f27653de",
         "a4bf8e5a-5a22-4909-98f2-4f05b4b8fe8f",
         "ca3ff72d-6c7a-4929-8bd5-4ec29255584e",

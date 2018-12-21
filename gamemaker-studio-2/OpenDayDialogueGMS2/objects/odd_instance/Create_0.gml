@@ -9,6 +9,7 @@ handleChoice = undefined;
 textMainProcessor = undefined;
 textChoiceProcessor = undefined;
 textDefinitionProcessor = undefined;
+handleSceneEnd = undefined;
 
 programCounter = 0;
 stack = ds_stack_create();

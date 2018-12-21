@@ -14,6 +14,7 @@ namespace OpenDayDialogue
         public delegate string TextProcessor(string input);
         public delegate void HandleText(string text);
         public delegate void HandleChoice(IList<string> choices);
+        public delegate void HandleSceneEnd();
 
         public Binary binary;
         public VariableStore variableStore;
@@ -24,6 +25,7 @@ namespace OpenDayDialogue
         public TextProcessor textMainProcessor;
         public TextProcessor textChoiceProcessor;
         public TextProcessor textDefinitionProcessor;
+        public HandleSceneEnd handleSceneEnd;
         
         public int debugCurrentLine;
 
@@ -34,7 +36,7 @@ namespace OpenDayDialogue
         private List<DialogueChoice> currentChoices;
         private bool inChoice;
         private bool pause;
-        
+
         /// <summary>
         /// The name of the current scene being run.
         /// </summary>
@@ -54,13 +56,13 @@ namespace OpenDayDialogue
         /// Whether or not the interpreter is currently in a choice, waiting for input.
         /// </summary>
         public bool IsInChoice { get { return inChoice; } }
-        
+
         /// <summary>
         /// Initializes a new interpreter, given a binary and other options.
         /// </summary>
         public Interpreter(Binary binary, VariableStore variableStore, FunctionHandler functionHandler, CommandHandler commandHandler, 
                             HandleText handleText = null, HandleChoice handleChoice = null, TextProcessor textMainProcessor = null,
-                            TextProcessor textChoiceProcessor = null, TextProcessor textDefinitionProcessor = null)
+                            TextProcessor textChoiceProcessor = null, TextProcessor textDefinitionProcessor = null, HandleSceneEnd handleSceneEnd = null)
         {
             this.binary = binary;
             this.variableStore = variableStore;
@@ -71,6 +73,7 @@ namespace OpenDayDialogue
             this.textMainProcessor = textMainProcessor;
             this.textChoiceProcessor = textChoiceProcessor;
             this.textDefinitionProcessor = textDefinitionProcessor;
+            this.handleSceneEnd = handleSceneEnd;
 
             programCounter = 0;
             stack = new Stack<Value>();
@@ -166,7 +169,7 @@ namespace OpenDayDialogue
         public Value GetDefinition(string key)
         {
             if (!binary.definitions.ContainsKey(key))
-                return null;            
+                return null;
             Value value = binary.definitions[key];
             if(textDefinitionProcessor != null && value.type == Value.Type.String)
                 value = new Value() { type = Value.Type.String, valueString = textDefinitionProcessor(value.valueString) };
@@ -474,6 +477,8 @@ namespace OpenDayDialogue
                     inChoice = false;
                     stack.Clear();
                     pause = true;
+                    if (handleSceneEnd != null)
+                        handleSceneEnd();
                     break;
                 case Instruction.Opcode.TextRun:
                     currentText = binary.stringTable[(uint)inst.operand1];

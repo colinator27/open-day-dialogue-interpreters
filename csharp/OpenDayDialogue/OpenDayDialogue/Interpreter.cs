@@ -14,6 +14,7 @@ namespace OpenDayDialogue
         public delegate string TextProcessor(string input);
         public delegate void HandleText(string text);
         public delegate void HandleChoice(IList<string> choices);
+        public delegate void HandleSceneEnd();
 
         public Binary binary;
         public VariableStore variableStore;
@@ -24,6 +25,7 @@ namespace OpenDayDialogue
         public TextProcessor textMainProcessor;
         public TextProcessor textChoiceProcessor;
         public TextProcessor textDefinitionProcessor;
+        public HandleSceneEnd handleSceneEnd;
         
         public int debugCurrentLine;
 
@@ -60,7 +62,7 @@ namespace OpenDayDialogue
         /// </summary>
         public Interpreter(Binary binary, VariableStore variableStore, FunctionHandler functionHandler, CommandHandler commandHandler, 
                             HandleText handleText = null, HandleChoice handleChoice = null, TextProcessor textMainProcessor = null,
-                            TextProcessor textChoiceProcessor = null, TextProcessor textDefinitionProcessor = null)
+                            TextProcessor textChoiceProcessor = null, TextProcessor textDefinitionProcessor = null, HandleSceneEnd handleSceneEnd = null)
         {
             this.binary = binary;
             this.variableStore = variableStore;
@@ -71,6 +73,7 @@ namespace OpenDayDialogue
             this.textMainProcessor = textMainProcessor;
             this.textChoiceProcessor = textChoiceProcessor;
             this.textDefinitionProcessor = textDefinitionProcessor;
+            this.handleSceneEnd = handleSceneEnd;
 
             programCounter = 0;
             stack = new Stack<Value>();
@@ -474,6 +477,8 @@ namespace OpenDayDialogue
                     inChoice = false;
                     stack.Clear();
                     pause = true;
+                    if (handleSceneEnd != null)
+                        handleSceneEnd();
                     break;
                 case Instruction.Opcode.TextRun:
                     currentText = binary.stringTable[(uint)inst.operand1];
