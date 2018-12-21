@@ -501,6 +501,7 @@ namespace OpenDayDialogue
                         {
                             args.Add(stack.Pop());
                         }
+                        args.Reverse(); // Arguments are popped backwards
                         Value v = functionHandler.RunFunction(name, args.ToArray());
                         if (v != null)
                         {

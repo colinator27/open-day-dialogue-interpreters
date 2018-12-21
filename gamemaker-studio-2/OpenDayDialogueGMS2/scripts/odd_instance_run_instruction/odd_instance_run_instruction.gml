@@ -256,7 +256,7 @@ with (instance)
 				__odd_error("Undefined function with name \"" + name + "\".");
 			var argCount = odd_value_val(odd_value_convert(ds_stack_pop(stack), odd_type_int32));
 			var args = array_create(argCount);
-			for (var i = 0; i < argCount; i++)
+			for (var i = argCount - 1; i >= 0; i--) // Arguments are popped backwards
 			{
 				args[i] = ds_stack_pop(stack);
 			}
