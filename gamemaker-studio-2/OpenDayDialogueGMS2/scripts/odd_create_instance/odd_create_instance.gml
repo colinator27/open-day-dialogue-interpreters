@@ -8,6 +8,7 @@
 /// @param optional_textMainProcessor
 /// @param optional_textChoiceProcessor
 /// @param optional_textDefinitionProcessor
+/// @param optional_handleSceneEnd
 
 var instance = __odd_instance_create(odd_instance);
 
@@ -32,6 +33,10 @@ if (argument_count > 4)
 				if (argument_count > 8)
 				{
 					instance.textDefinitionProcessor = argument[8];
+					if (argument_count > 9)
+					{
+						instance.handleSceneEnd = argument[9];
+					}
 				}
 			}
 		}
