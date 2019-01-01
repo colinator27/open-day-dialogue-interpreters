@@ -13,4 +13,6 @@ with (instance)
 	ds_stack_clear(stack);
 	debugCurrentLine = -1;
 	pause = true;
+	if (handleSceneEnd != undefined)
+		script_execute(handleSceneEnd);
 }

@@ -160,6 +160,8 @@ namespace OpenDayDialogue
             stack.Clear();
             debugCurrentLine = -1;
             pause = true;
+            if (handleSceneEnd != null)
+                handleSceneEnd();
         }
 
         /// <summary>

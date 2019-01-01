@@ -230,6 +230,8 @@ with (instance)
 			inChoice = false;
 			ds_stack_clear(stack);
 			pause = true;
+			if (handleSceneEnd != undefined)
+				script_execute(handleSceneEnd);
 			break;
 		case odd_opcode.TextRun:
 			currentText = binary.stringTable[? odd_instruction_op1(inst)];
